@@ -1,44 +1,41 @@
 import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
+import Box from "./components/Box/Box";
 import TempMovieList from "./components/TempMovieList/TempMovieList";
-// import tempMovieData from "./data/tempMovieData";
 import WatchedMoviesList from "./components/WatchedMoviesList/WatchedMoviesList";
+import WatchedDetail from "./components/WatchedDetail/WatchedDetail";
 import Logo from "./components/Logo/Logo";
 import Search from "./components/Search/Search";
 import ResultNumberMovies from "./components/ResultNumberMovies/ResultNumberMovies";
-import Button from "./components/Button/Button";
-import WatchedDetail from "./components/WatchedDetail/WatchedDetail";
 import Loader from "./components/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
+import MovieDetails from "./components/MovieDetails/MovieDetails";
 
 const KEY = "f84fc31d";
 
 const App = () => {
-  // variables
+  /******************* variables ***********************/
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const tempQuery = "interstellar";
+  const [selectedId, setSelectedId] = useState(null);
+  const [isOpen, setIsOpen] = useState(true);
 
-  // useEffect(function () {
-  //   console.log("AFTER RENDER"); // IN FAQAT BAD AZ RENDER AVAL
-  // }, []);
+  const handleSelectionId = (Id) => {
+    setSelectedId((selectedId) => (selectedId === Id ? null : Id));
+  };
 
-  // useEffect(
-  //   function () {
-  //     console.log("AFTER SEARCH"); // DOVOM IN
-  //   },
-  //   [query]
-  // );
+  const handleOpen = () => {
+    setIsOpen((open) => !open);
+  };
 
-  // useEffect(function () {
-  //   console.log("DURING RENDER"); // SEVOM IN
-  // });
+  const handleCloseDetail = () => {
+    setSelectedId(null);
+  };
 
-  // console.log("c");// AVAL IN CHAP MISHE
-
+  /******************* START FETCH DATA ***********************/
   useEffect(
     function () {
       async function fetchMovies() {
@@ -72,11 +69,8 @@ const App = () => {
     },
     [query]
   );
+  /*******************END FETCH DATA ***********************/
 
-  const [isOpenWatch, setIsOpenWatch] = useState(true);
-  const handleOpenWatch = () => {
-    setIsOpenWatch((w) => !w);
-  };
   return (
     <div className="min-h-screen bg-slate-950 p-3 md:p-5">
       <Navbar>
@@ -87,18 +81,27 @@ const App = () => {
         <ResultNumberMovies movies={movies} />
       </Navbar>
       <main className="main flex flex-col md:flex-row justify-center">
-        {/* {isLoading ? <Loader /> : <TempMovieList movies={movies} />} */}
-        {isLoading && <Loader />}
-        {!isLoading && !error && <TempMovieList movies={movies} />}
-        {error && <ErrorMessage message={error} />}
-        <WatchedMoviesList
-          watched={watched}
-          isOpenWatch={isOpenWatch}
-          onHandleOpenWatch={handleOpenWatch}
-        >
-          <Button onClick={handleOpenWatch}>{isOpenWatch ? "+" : "-"}</Button>
-          <WatchedDetail isOpenWatch={isOpenWatch} watched={watched} />
-        </WatchedMoviesList>
+        <Box isOpen={isOpen} onOpen={handleOpen}>
+          {isLoading && <Loader />}
+          {!isLoading && !error && (
+            <TempMovieList
+              movies={movies}
+              onSelctionId={handleSelectionId}
+              isOpen={isOpen}
+            />
+          )}
+          {error && <ErrorMessage message={error} />}
+        </Box>
+        <Box>
+          {selectedId ? (
+            <MovieDetails
+              selectedId={selectedId}
+              onCloseDetail={handleCloseDetail}
+            />
+          ) : (
+            <WatchedDetail watched={watched} />
+          )}
+        </Box>
       </main>
     </div>
   );

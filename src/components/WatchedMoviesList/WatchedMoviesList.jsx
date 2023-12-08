@@ -2,7 +2,7 @@ import Movie from "../Movie/Movie";
 
 const WatchedMoviesList = ({ watched, isOpenWatch, children }) => {
   return (
-    <div className="w-72 mx-auto md:mx-5 bg-slate-900 h-screen rounded-lg mt-5 md:mt-0">
+    <div>
       {children}
 
       {isOpenWatch && (

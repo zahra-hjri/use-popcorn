@@ -1,20 +1,12 @@
 import Movie from "../Movie/Movie";
-import Button from "../Button/Button";
-import { useState } from "react";
 
-const TempMovieList = ({ movies }) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const handleOpen = () => {
-    setIsOpen((open) => !open);
-  };
+const TempMovieList = ({ movies, onSelctionId, isOpen }) => {
   return (
-    <div className="w-72 mx-auto md:mx-5 bg-slate-900 min-h-full rounded-lg">
-      <Button onClick={handleOpen}>{isOpen ? "+" : "-"}</Button>
-
+    <div>
       {isOpen && (
         <div>
           {movies.map((movie) => (
-            <Movie movie={movie} key={movie.Title}>
+            <Movie movie={movie} key={movie.imdbID} onSelctionId={onSelctionId}>
               <span>📅 {movie.Year}</span>
             </Movie>
           ))}
