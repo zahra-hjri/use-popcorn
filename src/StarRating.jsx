@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Star from "./Star";
 
-const StarRating = ({ maxRating = 10, color = "#fcc914", size = 30 }) => {
+const StarRating = ({ maxRating = 10, color = "#fcc914", size = 18 }) => {
   const [rating, setRate] = useState(0);
   const [tempRate, setTempRate] = useState(0);
   const handleRating = (rating) => {
@@ -14,7 +14,7 @@ const StarRating = ({ maxRating = 10, color = "#fcc914", size = 30 }) => {
     setTempRate(0);
   };
   return (
-    <div className="flex gap-5 items-center justify-center h-screen bg-slate-500">
+    <div className="flex gap-3 justify-center">
       <div className="flex">
         {Array.from({ length: maxRating }, (_, i) => (
           <Star
@@ -28,7 +28,7 @@ const StarRating = ({ maxRating = 10, color = "#fcc914", size = 30 }) => {
           />
         ))}
       </div>
-      <p style={{ fontSize: `${size}px`, color: `${color}` }}>
+      <p className="text-xs" style={{ color: `${color}` }}>
         {tempRate || rating || ""}
       </p>
     </div>

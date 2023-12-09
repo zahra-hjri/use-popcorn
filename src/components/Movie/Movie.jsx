@@ -1,7 +1,7 @@
 const Movie = ({ movie, children, onSelctionId }) => {
   return (
     <div
-      className="flex justify-between hover:bg-slate-800 mt-3"
+      className="flex justify-between hover:bg-slate-700 rounded-lg"
       onClick={() => onSelctionId(movie.imdbID)}
     >
       <div className="flex p-3 ">

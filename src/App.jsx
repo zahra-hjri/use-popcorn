@@ -45,13 +45,14 @@ const App = () => {
           const res = await fetch(
             `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
           );
-
+          console.log(res);
           if (!res.ok)
-            throw new Error("somthing went worng with fetching monie");
+            throw new Error("somthing went worng with fetching movie");
 
           const data = await res.json();
           if (data.Response === "False") throw new Error("Movie is not found");
           setMovies(data.Search);
+          console.log(data.Search);
         } catch (err) {
           console.error(err.message);
           setError(err.message);

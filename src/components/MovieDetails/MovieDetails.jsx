@@ -1,37 +1,71 @@
 import { useEffect, useState } from "react";
 import { IoChevronBackCircle } from "react-icons/io5";
+import StarRating from "../../StarRating";
 const KEY = "f84fc31d";
 
 const MovieDetails = ({ selectedId, onCloseDetail }) => {
   const [movie, setMovie] = useState({});
 
-  const { Title: title, Poster: poster, Year: year } = movie;
+  const {
+    Title: title,
+    Poster: poster,
+    // Year: year,
+    Released: released,
+    Runtime: runtime,
+    Genre: genre,
+    imdbRating: rate,
+    Plot: plot,
+  } = movie;
 
-  useEffect(function () {
-    async function getMovieSelected() {
-      const res = await fetch(
-        `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`
-      );
+  useEffect(
+    function () {
+      async function getMovieSelected() {
+        const res = await fetch(
+          `http://www.omdbapi.com/?apikey=${KEY}&i=${selectedId}`
+        );
 
-      const data = await res.json();
-      setMovie(data);
-    }
-    getMovieSelected();
-  }, []);
+        const data = await res.json();
+        setMovie(data);
+        console.log(data);
+      }
+      getMovieSelected();
+    },
+    [selectedId]
+  );
 
   return (
-    <div>
-      <button onClick={onCloseDetail} className="">
+    <div className="relative rounded-lg">
+      <button onClick={onCloseDetail} className="absolute top-1 left-1">
         <IoChevronBackCircle className="text-white text-3xl" />
       </button>
-      <div className="flex p-2 bg-slate-700">
-        <img className="h-48 w-28" src={poster} alt={title} />
-        <div className="text-center">
-          <p className="text-white font-bold text-lg p-5">{title}</p>
-          <p className="text-white">{year}</p>
+      <header className="flex ">
+        <img className="h-44 w-32" src={poster} alt={title} />
+        <div className="mx-auto">
+          <p className="text-white font-bold text-base p-5">{title}</p>
+          <p>
+            <em className="text-white text-xs">
+              <span>{released} . </span>
+              <span> {runtime}</span>
+            </em>
+          </p>
+          <em className="text-slate-300 text-xs">{genre}</em>
+          <p>
+            <em className="text-slate-300 text-xs">⭐ {rate} IMDb Rating</em>
+          </p>
         </div>
-      </div>
-      {selectedId}
+      </header>
+      <main className="p-8">
+        <div className="flex flex-col bg-slate-800 rounded-lg p-5">
+          <StarRating />
+          <button className="bg-blue-700 text-white rounded-2xl w-2/3 my-3 mx-auto px-2 py-1">
+            + Add to list
+          </button>
+        </div>
+        <p className="p-5 text-justify">
+          <em className="text-slate-300 text-xs">{plot}</em>
+        </p>
+      </main>
+      {/* {selectedId} */}
     </div>
   );
 };
