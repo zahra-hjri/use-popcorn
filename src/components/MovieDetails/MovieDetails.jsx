@@ -3,13 +3,15 @@ import { IoChevronBackCircle } from "react-icons/io5";
 import StarRating from "../../StarRating";
 const KEY = "f84fc31d";
 
-const MovieDetails = ({ selectedId, onCloseDetail }) => {
+const MovieDetails = ({ selectedId, onCloseDetail, watched, setWatched }) => {
   const [movie, setMovie] = useState({});
 
+  const handleAddWatchedMovie = () => {
+    setWatched([...watched, movie]);
+  };
   const {
     Title: title,
     Poster: poster,
-    // Year: year,
     Released: released,
     Runtime: runtime,
     Genre: genre,
@@ -40,8 +42,8 @@ const MovieDetails = ({ selectedId, onCloseDetail }) => {
       </button>
       <header className="flex ">
         <img className="h-44 w-32" src={poster} alt={title} />
-        <div className="mx-auto">
-          <p className="text-white font-bold text-base p-5">{title}</p>
+        <div className="p-6">
+          <p className="text-white font-medium text-sm">{title}</p>
           <p>
             <em className="text-white text-xs">
               <span>{released} . </span>
@@ -65,6 +67,12 @@ const MovieDetails = ({ selectedId, onCloseDetail }) => {
           <em className="text-slate-300 text-xs">{plot}</em>
         </p>
       </main>
+      <button
+        onClick={handleAddWatchedMovie}
+        className="bg-green-700 rounded-2xl px-5 py-2 text-white font-bold text-xs mx-auto flex"
+      >
+        +add to watch
+      </button>
       {/* {selectedId} */}
     </div>
   );

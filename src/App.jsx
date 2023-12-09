@@ -4,6 +4,7 @@ import Box from "./components/Box/Box";
 import TempMovieList from "./components/TempMovieList/TempMovieList";
 import WatchedMoviesList from "./components/WatchedMoviesList/WatchedMoviesList";
 import WatchedDetail from "./components/WatchedDetail/WatchedDetail";
+import tempWatchedData from "./data/tempWatchedData";
 import Logo from "./components/Logo/Logo";
 import Search from "./components/Search/Search";
 import ResultNumberMovies from "./components/ResultNumberMovies/ResultNumberMovies";
@@ -17,7 +18,7 @@ const App = () => {
   /******************* variables ***********************/
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
+  const [watched, setWatched] = useState(tempWatchedData);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
@@ -52,7 +53,6 @@ const App = () => {
           const data = await res.json();
           if (data.Response === "False") throw new Error("Movie is not found");
           setMovies(data.Search);
-          console.log(data.Search);
         } catch (err) {
           console.error(err.message);
           setError(err.message);
@@ -98,9 +98,12 @@ const App = () => {
             <MovieDetails
               selectedId={selectedId}
               onCloseDetail={handleCloseDetail}
+              watched={watched}
+              setWatched={setWatched}
             />
           ) : (
-            <WatchedDetail watched={watched} />
+            // <WatchedDetail watched={watched} />
+            <WatchedMoviesList watched={watched} />
           )}
         </Box>
       </main>
