@@ -23,6 +23,11 @@ const App = () => {
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
   const [isOpen, setIsOpen] = useState(true);
+  const [rating, setRate] = useState(0);
+  const handleRating = (rating) => {
+    setRate(rating);
+    console.log(rating);
+  };
 
   const handleSelectionId = (Id) => {
     setSelectedId((selectedId) => (selectedId === Id ? null : Id));
@@ -39,12 +44,15 @@ const App = () => {
   /******************* START FETCH DATA ***********************/
   useEffect(
     function () {
+      const controller = new AbortController();
+
       async function fetchMovies() {
         try {
           setIsLoading(true);
           setError("");
           const res = await fetch(
-            `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
+            `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
+            { signal: controller.signal }
           );
           console.log(res);
           if (!res.ok)
@@ -67,6 +75,10 @@ const App = () => {
         return;
       }
       fetchMovies();
+
+      return function () {
+        controller.abort();
+      };
     },
     [query]
   );
@@ -100,10 +112,17 @@ const App = () => {
               onCloseDetail={handleCloseDetail}
               watched={watched}
               setWatched={setWatched}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
+              rating={rating}
+              setRate={setRate}
+              onRating={handleRating}
             />
           ) : (
-            // <WatchedDetail watched={watched} />
-            <WatchedMoviesList watched={watched} />
+            <div>
+              <WatchedDetail watched={watched} />
+              <WatchedMoviesList watched={watched} />
+            </div>
           )}
         </Box>
       </main>

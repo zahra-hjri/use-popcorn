@@ -4,11 +4,9 @@ const WatchedMoviesList = ({ watched, children }) => {
   return (
     <div>
       {children}
-
-      {/* {isOpenWatch && ( */}
       <div>
         {watched.map((movie) => (
-          <Movie key={movie.Title} movie={movie}>
+          <Movie key={movie.imdbId} movie={movie}>
             <div className="flex">
               <span>⭐{movie.imdbRating}</span>
               <span className="px-3">🌟{movie.userRating}</span>
@@ -17,7 +15,6 @@ const WatchedMoviesList = ({ watched, children }) => {
           </Movie>
         ))}
       </div>
-      {/* )} */}
     </div>
   );
 };
