@@ -6,7 +6,7 @@ const WatchedMoviesList = ({ watched, children }) => {
       {children}
       <div>
         {watched.map((movie) => (
-          <Movie key={movie.imdbId} movie={movie}>
+          <Movie key={movie.imdbID} movie={movie}>
             <div className="flex">
               <span>⭐{movie.imdbRating}</span>
               <span className="px-3">🌟{movie.userRating}</span>

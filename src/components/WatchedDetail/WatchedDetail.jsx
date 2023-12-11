@@ -7,7 +7,7 @@ const WatchedDetail = ({ watched }) => {
   const avgRuntime = average(watched.map((movie) => movie.runtime));
   return (
     <div>
-      <div className="flex justify-between px-1 shadow-2xl bg-slate-800 rounded-lg">
+      <div className="flex justify-between p-2 shadow-2xl bg-slate-800 rounded-lg">
         <div className="flex p-2">
           <div className="text-white text-xs flex flex-col ">
             <h2 className="pb-2 font-bold">MOVIES YOU WATCHED</h2>

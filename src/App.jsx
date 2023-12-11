@@ -4,7 +4,7 @@ import Box from "./components/Box/Box";
 import TempMovieList from "./components/TempMovieList/TempMovieList";
 import WatchedMoviesList from "./components/WatchedMoviesList/WatchedMoviesList";
 import WatchedDetail from "./components/WatchedDetail/WatchedDetail";
-import tempWatchedData from "./data/tempWatchedData";
+
 import Logo from "./components/Logo/Logo";
 import Search from "./components/Search/Search";
 import ResultNumberMovies from "./components/ResultNumberMovies/ResultNumberMovies";
@@ -18,12 +18,16 @@ const App = () => {
   /******************* variables ***********************/
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState(tempWatchedData);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
   const [isOpen, setIsOpen] = useState(true);
   const [rating, setRate] = useState(0);
+  // const [watched, setWatched] = useState([]);
+  const [watched, setWatched] = useState(function () {
+    const storedValue = localStorage.getItem("watched");
+    return JSON.parse(storedValue);
+  });
   const handleRating = (rating) => {
     setRate(rating);
     console.log(rating);
@@ -36,12 +40,23 @@ const App = () => {
   const handleOpen = () => {
     setIsOpen((open) => !open);
   };
+  const handleAddWatchedMovie = (movie) => {
+    setWatched((watched) => [...watched, movie]);
+  };
 
   const handleCloseDetail = () => {
     setSelectedId(null);
   };
 
-  /******************* START FETCH DATA ***********************/
+  /******************* START useEffects ***********************/
+
+  // useEffect(
+  //   function () {
+  //     localStorage.setItem("watched", JSON.stringify(watched));
+  //   },
+  //   [watched]
+  // );
+
   useEffect(
     function () {
       const controller = new AbortController();
@@ -117,6 +132,7 @@ const App = () => {
               rating={rating}
               setRate={setRate}
               onRating={handleRating}
+              handleAddWatchedMovie={handleAddWatchedMovie}
             />
           ) : (
             <div>

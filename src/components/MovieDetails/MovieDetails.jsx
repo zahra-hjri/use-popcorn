@@ -18,7 +18,10 @@ const MovieDetails = ({
   const [movie, setMovie] = useState({});
 
   const handleAddWatchedMovie = () => {
-    setWatched([...watched, movie]);
+    setWatched((watched) => [...watched, movie]);
+    onCloseDetail();
+
+    // localStorage.setItem("watched", JSON.stringify([...watched, movie]));
   };
   const {
     Title: title,
@@ -29,6 +32,13 @@ const MovieDetails = ({
     imdbRating: rate,
     Plot: plot,
   } = movie;
+
+  useEffect(
+    function () {
+      localStorage.setItem("watched", JSON.stringify(watched));
+    },
+    [watched]
+  );
 
   useEffect(
     function () {
