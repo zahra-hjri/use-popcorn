@@ -5,7 +5,7 @@ const Movie = ({ movie, children, onSelctionId }) => {
       onClick={() => onSelctionId(movie.imdbID)}
     >
       <div className="flex p-3">
-        <div className=" mr-4">
+        <div className="mr-4">
           <img className="w-10 h-13" src={movie.Poster} alt={movie.Title} />
         </div>
         <div className="text-white text-xs flex flex-col ">

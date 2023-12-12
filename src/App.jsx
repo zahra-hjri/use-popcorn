@@ -21,7 +21,6 @@ const App = () => {
   const [selectedId, setSelectedId] = useState(null);
   const [isOpen, setIsOpen] = useState(true);
   const [rating, setRate] = useState(0);
-  // const [watched, setWatched] = useState([]);
   const [watched, setWatched] = useState(function () {
     const storedValue = localStorage.getItem("watched");
     return JSON.parse(storedValue);
@@ -46,17 +45,6 @@ const App = () => {
   const handleCloseDetail = () => {
     setSelectedId((selectedId) => !selectedId);
   };
-
-  /******************* START useEffects ***********************/
-
-  // useEffect(
-  //   function () {
-  //     localStorage.setItem("watched", JSON.stringify(watched));
-  //   },
-  //   [watched]
-  // );
-
-  /*******************END FETCH DATA ***********************/
 
   return (
     <div className="min-h-screen bg-slate-950 p-3 md:p-5">
