@@ -19,7 +19,7 @@ const MovieDetails = ({
 
   const handleAddWatchedMovie = () => {
     setWatched((watched) => [...watched, movie]);
-    onCloseDetail();
+    // onCloseDetail();
 
     // localStorage.setItem("watched", JSON.stringify([...watched, movie]));
   };
