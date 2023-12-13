@@ -17,7 +17,6 @@ const App = () => {
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { movies, error } = useMovies(query);
-
   const [selectedId, setSelectedId] = useState(null);
   const [isOpen, setIsOpen] = useState(true);
   const [rating, setRate] = useState(0);
@@ -25,7 +24,7 @@ const App = () => {
     const storedValue = localStorage.getItem("watched");
     return JSON.parse(storedValue);
   });
-  // console.log(watched);
+
   const handleRating = (rating) => {
     setRate(rating);
     console.log(rating);
@@ -44,6 +43,11 @@ const App = () => {
 
   const handleCloseDetail = () => {
     setSelectedId((selectedId) => !selectedId);
+  };
+
+  const handleDeleteWatchedMovie = (id) => {
+    const removeItem = watched.filter((i) => i.imdbID !== id);
+    setWatched(removeItem);
   };
 
   return (
@@ -84,7 +88,10 @@ const App = () => {
           ) : (
             <div>
               <WatchedDetail watched={watched} />
-              <WatchedMoviesList watched={watched} />
+              <WatchedMoviesList
+                watched={watched}
+                onDelete={handleDeleteWatchedMovie}
+              />
             </div>
           )}
         </Box>

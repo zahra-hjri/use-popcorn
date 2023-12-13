@@ -1,6 +1,6 @@
 const WatchedMovie = ({ watchedMovie }) => {
   return (
-    <div className="flex justify-between border-b border-slate-700">
+    <div className="flex justify-between">
       <div className="flex p-2">
         <div className="w-7 h-7 mr-2">
           <img src={watchedMovie.Poster} alt={watchedMovie.Title} />
