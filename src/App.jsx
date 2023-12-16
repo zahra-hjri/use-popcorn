@@ -87,10 +87,11 @@ const App = () => {
             />
           ) : (
             <div>
-              <WatchedDetail watched={watched} />
+              <WatchedDetail watched={watched} rating={rating} />
               <WatchedMoviesList
                 watched={watched}
                 onDelete={handleDeleteWatchedMovie}
+                rating={rating}
               />
             </div>
           )}

@@ -1,6 +1,6 @@
 import Movie from "../Movie/Movie";
 import { IoIosCloseCircle } from "react-icons/io";
-const WatchedMoviesList = ({ watched, children, onDelete }) => {
+const WatchedMoviesList = ({ watched, children, onDelete, rating }) => {
   return (
     <div>
       {children}
@@ -11,7 +11,7 @@ const WatchedMoviesList = ({ watched, children, onDelete }) => {
               <Movie key={movie.imdbID} movie={movie}>
                 <div className="flex">
                   <span>⭐{movie.imdbRating}</span>
-                  <span className="px-3">🌟{movie.userRating}</span>
+                  <span className="px-3">🌟{movie.rating}</span>
                   <span className="">⏳{movie.Runtime} </span>
                 </div>
               </Movie>

@@ -19,10 +19,9 @@ const MovieDetails = ({
 
   const handleAddWatchedMovie = () => {
     setWatched((watched) => [...watched, movie]);
-    // onCloseDetail();
-
-    // localStorage.setItem("watched", JSON.stringify([...watched, movie]));
+    onCloseDetail();
   };
+
   const {
     Title: title,
     Poster: poster,
@@ -32,6 +31,7 @@ const MovieDetails = ({
     imdbRating: rate,
     Plot: plot,
   } = movie;
+  // console.log(userRating);
 
   useEffect(
     function () {

@@ -8,18 +8,15 @@ const StarRating = ({
   rating,
   onRating,
 }) => {
-  // const [rating, setRate] = useState(0);
   const [tempRate, setTempRate] = useState(0);
-  // const handleRating = (rating) => {
-  //   setRate(rating);
-  // };
+
   const handleMouseEnter = (tempRate) => {
     setTempRate(tempRate);
   };
   const handleMouseLeave = () => {
     setTempRate(0);
   };
-  // console.log(rating);
+
   return (
     <div className="flex gap-3 justify-center">
       <div className="flex">
