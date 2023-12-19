@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Star from "./Star";
+import Star from "../Star/Star";
 
 const StarRating = ({
   maxRating = 10,

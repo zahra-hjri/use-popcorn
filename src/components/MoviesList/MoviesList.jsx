@@ -1,6 +1,6 @@
 import Movie from "../Movie/Movie";
 
-const TempMovieList = ({ movies, onSelctionId, isOpen }) => {
+const MoviesList = ({ movies, onSelctionId, isOpen }) => {
   return (
     <div>
       {isOpen && (
@@ -16,4 +16,4 @@ const TempMovieList = ({ movies, onSelctionId, isOpen }) => {
   );
 };
 
-export default TempMovieList;
+export default MoviesList;

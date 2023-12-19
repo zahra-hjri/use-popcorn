@@ -1,25 +1,25 @@
 import { useState } from "react";
-import Navbar from "./components/Navbar/Navbar";
-import Box from "./components/Box/Box";
-import TempMovieList from "./components/TempMovieList/TempMovieList";
-import WatchedMoviesList from "./components/WatchedMoviesList/WatchedMoviesList";
-import WatchedDetail from "./components/WatchedDetail/WatchedDetail";
 import { useMovies } from "./useMovies";
+import Navbar from "./components/Navbar/Navbar";
 import Logo from "./components/Logo/Logo";
 import Search from "./components/Search/Search";
 import ResultNumberMovies from "./components/ResultNumberMovies/ResultNumberMovies";
 import Loader from "./components/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
+import Box from "./components/Box/Box";
+import MoviesList from "./components/MoviesList/MoviesList";
 import MovieDetails from "./components/MovieDetails/MovieDetails";
+import HeaderWatchedList from "./components/HeaderWatchedList/HeaderWatchedList";
+import WatchedMoviesList from "./components/WatchedMoviesList/WatchedMoviesList";
 
 const App = () => {
   /******************* variables ***********************/
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { movies, error } = useMovies(query);
   const [selectedId, setSelectedId] = useState(null);
   const [isOpen, setIsOpen] = useState(true);
   const [rating, setRate] = useState(0);
+  const { movies, error } = useMovies(query);
   const [watched, setWatched] = useState(function () {
     const storedValue = localStorage.getItem("watched");
     return JSON.parse(storedValue);
@@ -27,7 +27,6 @@ const App = () => {
 
   const handleRating = (rating) => {
     setRate(rating);
-    console.log(rating);
   };
 
   const handleSelectionId = (Id) => {
@@ -63,7 +62,7 @@ const App = () => {
         <Box isOpen={isOpen} onOpen={handleOpen}>
           {isLoading && <Loader />}
           {!isLoading && !error && (
-            <TempMovieList
+            <MoviesList
               movies={movies}
               onSelctionId={handleSelectionId}
               isOpen={isOpen}
@@ -83,11 +82,11 @@ const App = () => {
               rating={rating}
               setRate={setRate}
               onRating={handleRating}
-              handleAddWatchedMovie={handleAddWatchedMovie}
+              onAddWatchedMovie={handleAddWatchedMovie}
             />
           ) : (
             <div>
-              <WatchedDetail watched={watched} rating={rating} />
+              <HeaderWatchedList watched={watched} rating={rating} />
               <WatchedMoviesList
                 watched={watched}
                 onDelete={handleDeleteWatchedMovie}

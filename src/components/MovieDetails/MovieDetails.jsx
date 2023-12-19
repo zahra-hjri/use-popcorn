@@ -1,37 +1,45 @@
 import { useEffect, useState } from "react";
 import { IoChevronBackCircle } from "react-icons/io5";
-import StarRating from "../../StarRating";
+import StarRating from "../StarRaiting/StarRating";
 import Loader from "../Loader";
+
 const KEY = "f84fc31d";
 
 const MovieDetails = ({
   selectedId,
   onCloseDetail,
   watched,
-  setWatched,
   isLoading,
   setIsLoading,
   rating,
   setRate,
   onRating,
+  onAddWatchedMovie,
 }) => {
   const [movie, setMovie] = useState({});
-
-  const handleAddWatchedMovie = () => {
-    setWatched((watched) => [...watched, movie]);
-    onCloseDetail();
-  };
-
+  const [userRating, setUserRating] = useState(0);
   const {
     Title: title,
+    Year: year,
     Poster: poster,
     Released: released,
     Runtime: runtime,
     Genre: genre,
-    imdbRating: rate,
+    imdbRating,
     Plot: plot,
   } = movie;
-  // console.log(userRating);
+
+  function handleAdd() {
+    const newMovie = {
+      imdbID: selectedId,
+      title,
+
+      imdbRating: Number(imdbRating),
+      runtime: Number(runtime.split(" ").at(0)),
+      poster,
+    };
+    onAddWatchedMovie(newMovie);
+  }
 
   useEffect(
     function () {
@@ -51,7 +59,6 @@ const MovieDetails = ({
         const data = await res.json();
         setIsLoading(false);
         setMovie(data);
-        // console.log(data);
       }
       getMovieSelected();
     },
@@ -98,13 +105,9 @@ const MovieDetails = ({
           </header>
           <main className="p-8">
             <div className="flex flex-col bg-slate-800 rounded-lg p-5">
-              <StarRating
-                rating={rating}
-                setRate={setRate}
-                onRating={onRating}
-              />
+              <StarRating />
               <button
-                onClick={handleAddWatchedMovie}
+                onClick={handleAdd}
                 className="bg-blue-800 text-white rounded-2xl w-2/3 mt-7 mx-auto px-2 py-1"
               >
                 + Add to list

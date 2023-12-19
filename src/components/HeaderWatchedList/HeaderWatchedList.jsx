@@ -1,9 +1,10 @@
-const WatchedDetail = ({ watched, rating }) => {
+const HeaderWatchedList = ({ watched, rating }) => {
   const average = (arr) =>
     arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
+  console.log(rating);
 
-  const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
-  const avgUserRating = average(watched.map((movie) => rating));
+  const avgImdbRating = average(watched.map((movie) => movie.rate));
+  const avgUserRating = average(watched.map((movie) => movie.rating));
   const avgRuntime = average(watched.map((movie) => movie.runtime));
   return (
     <div>
@@ -24,4 +25,4 @@ const WatchedDetail = ({ watched, rating }) => {
   );
 };
 
-export default WatchedDetail;
+export default HeaderWatchedList;
