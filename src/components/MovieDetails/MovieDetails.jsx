@@ -11,13 +11,10 @@ const MovieDetails = ({
   watched,
   isLoading,
   setIsLoading,
-  rating,
-  setRate,
-  onRating,
   onAddWatchedMovie,
 }) => {
-  const [movie, setMovie] = useState({});
-  const [userRating, setUserRating] = useState(0);
+  const [movie, setMovie] = useState([]);
+  // const [userRating, setUserRating] = useState(0);
   const {
     Title: title,
     Poster: poster,
@@ -32,7 +29,6 @@ const MovieDetails = ({
     const newMovie = {
       imdbID: selectedId,
       title,
-
       imdbRating: Number(imdbRating),
       runtime: Number(runtime.split(" ").at(0)),
       poster,
