@@ -20,7 +20,6 @@ const MovieDetails = ({
   const [userRating, setUserRating] = useState(0);
   const {
     Title: title,
-    Year: year,
     Poster: poster,
     Released: released,
     Runtime: runtime,
@@ -97,9 +96,7 @@ const MovieDetails = ({
               </p>
               <em className="text-slate-300 text-xs">{genre}</em>
               <p>
-                <em className="text-slate-300 text-xs">
-                  ⭐ {rate} IMDb Rating
-                </em>
+                <em className="text-slate-300 text-xs">⭐ IMDb Rating</em>
               </p>
             </div>
           </header>
