@@ -12,7 +12,7 @@ const MoviesList = ({ movies, onSelctionId, isOpen }) => {
                 key={movie.imdbID}
                 onSelctionId={onSelctionId}
               >
-                <span>📅 {movie.Year}</span>
+                <span>📅 {movie.year}</span>
               </Movie>
             ))}
           </div>
