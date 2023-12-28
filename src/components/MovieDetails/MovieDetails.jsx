@@ -5,33 +5,34 @@ import Loader from "../Loader";
 
 const KEY = "f84fc31d";
 
-const MovieDetails = ({
+function MovieDetails({
   selectedId,
   onCloseDetail,
   watched,
   isLoading,
   setIsLoading,
   onAddWatchedMovie,
-}) => {
+}) {
   const [movie, setMovie] = useState([]);
-  // const [userRating, setUserRating] = useState(0);
-  const {
-    Title: title,
-    Poster: poster,
-    Released: released,
-    Runtime: runtime,
-    Genre: genre,
-    imdbRating,
-    Plot: plot,
-  } = movie;
+  const { Title, Poster, Runtime, imdbRating, Released, Genre, Plot } = movie;
+
+  // const {
+  //   Title: title,
+  //   Poster: poster,
+  //   Released: released,
+  //   Runtime: runtime,
+  //   Genre: genre,
+  //   imdbRating,
+  //   Plot: plot,
+  // } = movie;
 
   function handleAdd() {
     const newMovie = {
       imdbID: selectedId,
-      title,
+      Title,
       imdbRating: Number(imdbRating),
-      runtime: Number(runtime.split(" ").at(0)),
-      poster,
+      Runtime: Number(Runtime.split(" ").at(0)),
+      Poster,
     };
     onAddWatchedMovie(newMovie);
   }
@@ -62,14 +63,14 @@ const MovieDetails = ({
 
   useEffect(
     function () {
-      if (!title) return;
-      document.title = `Movie | ${title} `;
+      if (!Title) return;
+      document.title = `Movie | ${Title} `;
 
       return function () {
         document.title = "usePopcorn";
       };
     },
-    [title]
+    [Title]
   );
   return (
     <div className="relative rounded-lg">
@@ -81,16 +82,16 @@ const MovieDetails = ({
       ) : (
         <div className="detailes">
           <header className="flex ">
-            <img className="h-44 w-32" src={poster} alt={title} />
+            <img className="h-44 w-32" src={Poster} alt={Title} />
             <div className="p-6">
-              <p className="text-white font-medium text-sm">{title}</p>
+              <p className="text-white font-medium text-sm">{Title}</p>
               <p>
                 <em className="text-white text-xs">
-                  <span>{released} . </span>
-                  <span> {runtime}</span>
+                  <span>{Released} . </span>
+                  <span> {Runtime}</span>
                 </em>
               </p>
-              <em className="text-slate-300 text-xs">{genre}</em>
+              <em className="text-slate-300 text-xs">{Genre}</em>
               <p>
                 <em className="text-slate-300 text-xs">⭐ IMDb Rating</em>
               </p>
@@ -107,7 +108,7 @@ const MovieDetails = ({
               </button>
             </div>
             <p className="p-5 text-justify">
-              <em className="text-slate-300 text-xs">{plot}</em>
+              <em className="text-slate-300 text-xs">{Plot}</em>
             </p>
           </main>
         </div>
@@ -115,6 +116,6 @@ const MovieDetails = ({
       {/* {selectedId} */}
     </div>
   );
-};
+}
 
 export default MovieDetails;
