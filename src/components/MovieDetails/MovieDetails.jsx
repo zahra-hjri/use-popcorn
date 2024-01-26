@@ -97,8 +97,8 @@ function MovieDetails({
               </p>
             </div>
           </header>
-          <main className="p-8">
-            <div className="flex flex-col bg-slate-800 rounded-lg p-5">
+          <main className="p-9">
+            <div className="flex flex-col bg-slate-800 rounded-lg p-4">
               <StarRating />
               <button
                 onClick={handleAdd}
