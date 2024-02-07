@@ -6,7 +6,7 @@ const Logo = () => {
         className="font-bold flex text-xs sm:text-base lg:text-xl sm:p-2"
       >
         🍿
-        <h1>usePopcorn</h1>
+        <h1 className="text-sm">usePopcorn</h1>
       </span>
     </div>
   );
