@@ -1,6 +1,6 @@
 const ErrorMessage = ({ message }) => {
   return (
-    <div className="text-white bg-slate-950 rounded-lg p-5 w-72 text-center font-bold">
+    <div className="text-white bg-slate-950 rounded-lg p-5 w-80 text-center font-bold">
       {message}📛
     </div>
   );
