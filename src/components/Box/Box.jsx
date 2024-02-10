@@ -6,7 +6,7 @@ const Box = ({ children, isOpen, onOpen }) => {
     <div className="w-72 md:w-80 lg:w-96 mx-auto md:mx-6 bg-slate-800 min-h-screen rounded-lg relative">
       <div className="flex justify-end">
         <button
-          className="text-md absolute top-2 right-2 text-slate-500"
+          className="text-md absolute top-2 right-2 text-slate-600"
           onClick={onOpen}
         >
           {isOpen ? <FaPlusCircle /> : <FaMinusCircle />}
