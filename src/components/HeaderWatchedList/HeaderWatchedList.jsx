@@ -13,10 +13,10 @@ const HeaderWatchedList = ({ watched, rating }) => {
           <div className="text-white text-xs flex flex-col ">
             <h2 className="pb-3 font-bold">MOVIES YOU WATCHED</h2>
             <div className="flex">
-              <span className="pr-2">♒ {watched.length} movie</span>
+              <span className="pr-3">♒ {watched.length} movie</span>
               <span className="">⭐{avgImdbRating}</span>
               <span className="px-3">🌟{avgUserRating}</span>
-              <span className="">⏳{avgRuntime}min </span>
+              <span className="pr-2">⏳{avgRuntime}min </span>
             </div>
           </div>
         </div>
