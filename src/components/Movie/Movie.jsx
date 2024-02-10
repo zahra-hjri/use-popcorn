@@ -6,7 +6,7 @@ const Movie = ({ movie, children, onSelctionId }) => {
     >
       <div className="flex p-4">
         <div className="mr-5 px-1">
-          <img className="w-10 h-12" src={movie.poster} alt={movie.title} />
+          <img className="w-10 h-10" src={movie.poster} alt={movie.title} />
         </div>
         <div className="text-white text-xs flex flex-col">
           <span className="pb-3 font-bold">{movie.title}</span>
